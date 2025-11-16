@@ -1,0 +1,156 @@
+.container {
+  max-width: 90%;
+  margin: 20px auto;
+  padding: 25px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: #1a1a1a;
+}
+
+.stepBar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding: 0 10px;
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  padding: 12px 5px;
+  border-bottom: 3px solid #ccc;
+  font-weight: 500;
+  color: #666;
+  transition: all 0.3s ease;
+}
+
+.active {
+  border-bottom: 3px solid #007bff;
+  color: #007bff;
+  font-weight: 600;
+}
+
+.stepContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.labelField {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.inputField, .selectField {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background-color: #fff;
+}
+
+.inputField:focus, .selectField:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0,123,255,0.3);
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #007bff;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
+
+.btnGenerateOffers {
+  background: #17a2b8;
+}
+
+.btnGenerateOffers:hover {
+  background: #117a8b;
+}
+
+.btnFinalize {
+  background: #28a745;
+}
+
+.btnFinalize:hover {
+  background: #1e7e34;
+}
+
+.navigationBtns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.inputContainer {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+  gap: 10px;
+}
+.moveBtn {
+  font-size: 20px;
+  color: var(--text-color);
+  width: 150px;
+  height: 35px;
+  background-color: var(--main-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.offerCard {
+  background: #f1f1f1;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.offerCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.selected {
+  border-color: #28a745;
+  background: #e6ffe6;
+}
+
+@media screen and (max-width: 768px) {
+  .stepBar {
+    flex-direction: column;
+  }
+  .step {
+    margin-bottom: 10px;
+  }
+}
+  

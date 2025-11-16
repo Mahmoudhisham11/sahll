@@ -1,0 +1,213 @@
+/* Container العام */
+.container {
+    width: 100%;
+    margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Header + زر الإضافة */
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a202c;
+}
+
+.addBtn {
+  background-color: #0070f3;
+  color: #fff;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.addBtn:hover {
+  background-color: #005bb5;
+  transform: translateY(-2px);
+}
+
+/* Search Field */
+.searchInput {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  margin-bottom: 25px;
+  transition: all 0.3s;
+}
+
+.searchInput:focus {
+  border-color: #0070f3;
+  box-shadow: 0 0 8px rgba(0, 112, 243, 0.3);
+  outline: none;
+}
+
+/* Table Wrapper */
+.tableWrapper {
+  overflow-x: auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  background: #fff;
+}
+
+/* Table */
+.banksTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 900px;
+}
+
+.banksTable th, .banksTable td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+.banksTable th {
+  font-weight: 600;
+}
+
+.banksTable tr:hover {
+  background-color: #f0f8ff;
+  transition: background 0.3s;
+}
+
+/* زر الحذف في الجدول */
+.deleteBtn {
+  padding: 6px 12px;
+  background-color: #ff4d4f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.deleteBtn:hover {
+  background-color: #d9363e;
+  transform: translateY(-1px);
+}
+
+/* Popup Overlay */
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Popup */
+.popup {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 15px;
+  width: 450px;
+  max-width: 90%;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: slideIn 0.3s ease-in-out;
+}
+
+/* Popup Title */
+.popupTitle {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #0070f3;
+  text-align: center;
+}
+
+/* Inputs & textarea inside popup */
+.popup input, .popup textarea {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  width: 100%;
+  transition: all 0.3s;
+}
+
+.popup input:focus, .popup textarea:focus {
+  border-color: #0070f3;
+  box-shadow: 0 0 8px rgba(0, 112, 243, 0.3);
+  outline: none;
+}
+
+/* Textarea */
+.popup textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* Popup Buttons */
+.popupButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.confirmBtn {
+  background-color: #0070f3;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.confirmBtn:hover {
+  background-color: #005bb5;
+  transform: translateY(-1px);
+}
+
+.cancelBtn {
+  background-color: #e0e0e0;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.cancelBtn:hover {
+  background-color: #bdbdbd;
+  transform: translateY(-1px);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
