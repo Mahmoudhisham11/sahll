@@ -8,7 +8,7 @@
   --main-color: #ffde00;
   --hover-color: #ffde00;
   --background: #eef0f1;
-  --text-color: #2e2e2e;
+  --text-color: #5a7184;
 }
 body {
   direction: rtl;
@@ -19,7 +19,6 @@ body {
   min-height: 100vh;
 }
 .inputContainer {
-  background-color: red;
   width: 100%;
   display: flex;
   align-items: center;

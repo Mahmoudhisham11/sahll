@@ -18,12 +18,19 @@ export default function FinanceCalculatorPage() {
     price: ''
   });
   const [step, setStep] = useState(1);
+  const steps = [
+  { icon: '🚗', label: 'اختر السيارة' },
+  { icon: '👤', label: 'بيانات العميل' },
+  { icon: '💰', label: 'العروض' },
+  { icon: '✔️', label: 'تنفيذ الطلب' },
+];
+
   const [clientData, setClientData] = useState({
     name: '',
     phone: '',
-    gender: '',
+    // gender: '',
     birthDate: '',
-    city: '',
+    // city: '',
     nationalId: '',
     workType: '',
     salary: '',
@@ -117,7 +124,7 @@ export default function FinanceCalculatorPage() {
       alert('⚠️ اختر الماركة والموديل على الأقل');
       return;
     }
-    if(step === 2 && (!clientData.name || !clientData.phone || !clientData.gender || !clientData.birthDate || !clientData.city || !clientData.workType || !clientData.salary || !clientData.salaryBank || !clientData.monthlyObligations || !clientData.nationality)) {
+    if(step === 2 && (!clientData.name || !clientData.phone || !clientData.birthDate|| !clientData.workType || !clientData.salary || !clientData.salaryBank || !clientData.monthlyObligations || !clientData.nationality)) {
       alert('⚠️ أكمل بيانات العميل الأساسية');
       return;
     }
@@ -154,162 +161,230 @@ export default function FinanceCalculatorPage() {
     <div className="main">
       <Header />
       <div className={styles.container}>
-        <h2 className={styles.title}>الحاسبة المالية</h2>
-
-        {/* Step Bar */}
-        <div className={styles.stepBar}>
-          <div className={`${styles.step} ${step >= 1 ? styles.active : ''}`}>1. اختر السيارة</div>
-          <div className={`${styles.step} ${step >= 2 ? styles.active : ''}`}>2. بيانات العميل</div>
-          <div className={`${styles.step} ${step >= 3 ? styles.active : ''}`}>3. العروض</div>
-          <div className={`${styles.step} ${step >= 4 ? styles.active : ''}`}>4. تنفيذ الطلب</div>
+        <div className={styles.title}>
+          <h2>طلب تمويل</h2>
+          <p>قم بملء بياناتك بسهولة لعروض التمويل</p>
         </div>
 
-        {/* الخطوة 1: اختيار السيارة */}
-        {step === 1 && (
-          <div className={styles.stepContent}>
-            <h3>اختر السيارة</h3>
-            <div className={styles.inputContainer}>
-              <label>الماركة:</label>
-              <select className={styles.inputField} value={selectedCar.brand} onChange={e => setSelectedCar({...selectedCar, brand: e.target.value, model:'', year:'', transmission:'', category:'', color:''})}>
-                <option value="">اختر الماركة</option>
-                {getBrands().map(brand => <option key={brand} value={brand}>{brand}</option>)}
-              </select>
-            </div>
-            <div className={styles.inputContainer}>
-              <label>الموديل:</label>
-              <select className={styles.inputField} value={selectedCar.model} onChange={e => setSelectedCar({...selectedCar, model:e.target.value, year:'', transmission:'', category:'', color:''})}>
-                <option value="">اختر الموديل</option>
-                {getModels().map(model => <option key={model} value={model}>{model}</option>)}
-              </select>
-            </div>
-            <div className={styles.inputContainer}>
-              <label>سنة التصنيع:</label>
-              <select className={styles.inputField} value={selectedCar.year} onChange={e => setSelectedCar({...selectedCar, year:e.target.value, transmission:'', category:'', color:''})}>
-                <option value="">اختر السنة</option>
-                {getYears().map(year => <option key={year} value={year}>{year}</option>)}
-              </select>
-            </div>
-            <div className={styles.inputContainer}>
-              <label>نوع الجير:</label>
-              <select className={styles.inputField} value={selectedCar.transmission} onChange={e => setSelectedCar({...selectedCar, transmission:e.target.value, category:'', color:''})}>
-                <option value="">اختر نوع الجير</option>
-                {getTransmissions().map(trans => <option key={trans} value={trans}>{trans}</option>)}
-              </select>
-            </div>
-            <div className={styles.inputContainer}>
-              <label>الفئة:</label>
-              <select className={styles.inputField} value={selectedCar.category} onChange={e => setSelectedCar({...selectedCar, category:e.target.value, color:''})}>
-                <option value="">اختر الفئة</option>
-                {getCategories().map(cat => <option key={cat} value={cat}>{cat}</option>)}
-              </select>
-            </div>
-            <label style={{width: '100%'}}>اللون:</label>
-            <select className={styles.inputField} value={selectedCar.color} onChange={e => setSelectedCar({...selectedCar, color:e.target.value})}>
-              <option value="">اختر اللون</option>
-              {getColors().map(color => <option key={color} value={color}>{color}</option>)}
-            </select>
-          </div>
-        )}
-
-        {/* الخطوة 2: بيانات العميل */}
-        {step === 2 && (
-          <div className={styles.stepContent}>
-            <h3>أدخل بيانات العميل</h3>
-            <input className={styles.inputField} type="text" placeholder="اسم العميل" value={clientData.name} onChange={e => setClientData({...clientData, name: e.target.value})}/>
-            <input className={styles.inputField} type="text" placeholder="رقم الهاتف" value={clientData.phone} onChange={e => setClientData({...clientData, phone: e.target.value})}/>
-            <label className={styles.labelField}>الجنس:</label>
-            <select className={styles.selectField} value={clientData.gender} onChange={e => setClientData({...clientData, gender: e.target.value})}>
-              <option value="">اختر الجنس</option>
-              <option value="ذكر">ذكر</option>
-              <option value="أنثى">أنثى</option>
-            </select>
-            <label className={styles.labelField}>تاريخ الميلاد:</label>
-            <input className={styles.inputField} type="date" value={clientData.birthDate} onChange={e => setClientData({...clientData, birthDate: e.target.value})}/>
-            <input className={styles.inputField} type="text" placeholder="المدينة" value={clientData.city} onChange={e => setClientData({...clientData, city: e.target.value})}/>
-            <input className={styles.inputField} type="text" placeholder="رقم الهوية (اختياري)" value={clientData.nationalId} onChange={e => setClientData({...clientData, nationalId: e.target.value})}/>
-            <label className={styles.labelField}>جهة العمل:</label>
-            <select className={styles.selectField} value={clientData.workType} onChange={e => setClientData({...clientData, workType: e.target.value})}>
-              <option value="">اختر جهة العمل</option>
-              <option value="حكومي مدني">حكومي مدني</option>
-              <option value="حكومي عسكري">حكومي عسكري</option>
-              <option value="متقاعد">متقاعد</option>
-            </select>
-            <input className={styles.inputField} type="number" placeholder="الراتب" value={clientData.salary} onChange={e => setClientData({...clientData, salary: e.target.value})}/>
-            <input className={styles.inputField} type="text" placeholder="جهة تحويل الراتب" value={clientData.salaryBank} onChange={e => setClientData({...clientData, salaryBank: e.target.value})}/>
-            <input className={styles.inputField} type="number" placeholder="اجمالي الالتزامات الشهرية" value={clientData.monthlyObligations} onChange={e => setClientData({...clientData, monthlyObligations: e.target.value})}/>
-            <label className={styles.labelField}>الجنسية:</label>
-            <select className={styles.selectField} value={clientData.nationality} onChange={e => setClientData({...clientData, nationality: e.target.value})}>
-              <option value="">اختر الجنسية</option>
-              <option value="سعودي">سعودي</option>
-              <option value="مقيم">مقيم</option>
-              <option value="قبائل نازحة">قبائل نازحة</option>
-            </select>
-            <input className={styles.inputField} type="email" placeholder="البريد الإلكتروني (اختياري)" value={clientData.email} onChange={e => setClientData({...clientData, email: e.target.value})}/>
-            <div className={styles.radioGroup}>
-              <label>هل يوجد تعثرات مالية؟</label>
-              <label><input type="radio" name="financialIssues" value="نعم" checked={clientData.financialIssues === 'نعم'} onChange={e => setClientData({...clientData, financialIssues: e.target.value})}/> نعم</label>
-              <label><input type="radio" name="financialIssues" value="لا" checked={clientData.financialIssues === 'لا'} onChange={e => setClientData({...clientData, financialIssues: e.target.value})}/> لا</label>
-            </div>
-            <div className={styles.radioGroup}>
-              <label>هل يوجد مخالفات مرورية؟</label>
-              <label><input type="radio" name="trafficFines" value="نعم" checked={clientData.trafficFines === 'نعم'} onChange={e => setClientData({...clientData, trafficFines: e.target.value})}/> نعم</label>
-              <label><input type="radio" name="trafficFines" value="لا" checked={clientData.trafficFines === 'لا'} onChange={e => setClientData({...clientData, trafficFines: e.target.value})}/> لا</label>
-            </div>
-            <div className={styles.radioGroup}>
-              <label>هل يوجد رخصة قيادة؟</label>
-              <label><input type="radio" name="drivingLicense" value="نعم" checked={clientData.drivingLicense === 'نعم'} onChange={e => setClientData({...clientData, drivingLicense: e.target.value})}/> نعم</label>
-              <label><input type="radio" name="drivingLicense" value="لا" checked={clientData.drivingLicense === 'لا'} onChange={e => setClientData({...clientData, drivingLicense: e.target.value})}/> لا</label>
-            </div>
-            <div className={styles.radioGroup}>
-              <label>هل يوجد قرض عقاري؟</label>
-              <label><input type="radio" name="mortgageLoan" value="نعم" checked={clientData.mortgageLoan === 'نعم'} onChange={e => setClientData({...clientData, mortgageLoan: e.target.value})}/> نعم</label>
-              <label><input type="radio" name="mortgageLoan" value="لا" checked={clientData.mortgageLoan === 'لا'} onChange={e => setClientData({...clientData, mortgageLoan: e.target.value})}/> لا</label>
-            </div>
-            <button className={`${styles.btn} ${styles.btnGenerateOffers}`} onClick={generateOffers}>احسب العروض</button>
-          </div>
-        )}
-
-        {/* الخطوة 3: العروض */}
-        {step === 3 && (
-          <div className={styles.stepContent}>
-            <h3>العروض المتاحة</h3>
-            {offers.map(offer => (
-              <div
-                key={offer.id}
-                className={`${styles.offerCard} ${selectedOffer?.id === offer.id ? styles.selected : ''}`}
-                onClick={() => setSelectedOffer(offer)}
-              >
-                <p>البنك: {offer.bank}</p>
-                <p>أقل مقدم: {offer.minDownPayment}%</p>
-                <p>المدة: {offer.minDuration} - {offer.maxDuration} سنوات</p>
-                <p>نسبة التمويل: {offer.interestRate}%</p>
-                <p>{offer.notes}</p>
+        <div className={styles.content}>
+        <div className={styles.stepsWrapper}>
+          {steps.map((stepItem, index) => (
+            <div key={index} className={styles.stepItemWrapper}>
+              <div className={styles.iconWrapper}>
+                {step >= index + 1 && <span className={styles.activeCircle}></span>}
+                <span className={styles.icon}>{stepItem.icon}</span>
               </div>
-            ))}
-          </div>
-        )}
+              <p className={styles.stepLabel}>{stepItem.label}</p>
+              {index < steps.length - 1 && step > index && (
+                <div className={styles.stepLine}></div>
+              )}
+            </div>
+          ))}
+        </div>
 
-        {/* الخطوة 4: تنفيذ الطلب */}
-        {step === 4 && selectedOffer && (
-          <div className={styles.stepContent}>
-            <h3>تنفيذ الطلب</h3>
-            <p>العميل: {clientData.name}</p>
-            <p>السيارة: {selectedCar.brand} - {selectedCar.model}</p>
-            <p>البنك / جهة التمويل: {selectedOffer.bank}</p>
-            <select value={seller} onChange={e => setSeller(e.target.value)}>
-              <option value="">اختر اسم البائع</option>
-              <option value="Ahmed">Ahmed</option>
-              <option value="Mohamed">Mohamed</option>
-              <option value="Ali">Ali</option>
-            </select>
-            <button className={styles.finalizeBtn} onClick={finalizeRequest}>تنفيذ الطلب</button>
-          </div>
-        )}
-
+        <div className={styles.form}>
+          {step === 1 && (
+            <div className={styles.stepContent}>
+              <div className={styles.inputBox}>
+                <div className={styles.inputContainer}>
+                <label>الماركة:</label>
+                <select className={styles.inputField} value={selectedCar.brand} onChange={e => setSelectedCar({...selectedCar, brand: e.target.value, model:'', year:'', transmission:'', category:'', color:''})}>
+                  <option value="">اختر الماركة</option>
+                  {getBrands().map(brand => <option key={brand} value={brand}>{brand}</option>)}
+                </select>
+              </div>
+              <div className={styles.inputContainer}>
+                <label>الموديل:</label>
+                <select className={styles.inputField} value={selectedCar.model} onChange={e => setSelectedCar({...selectedCar, model:e.target.value, year:'', transmission:'', category:'', color:''})}>
+                  <option value="">اختر الموديل</option>
+                  {getModels().map(model => <option key={model} value={model}>{model}</option>)}
+                </select>
+              </div>
+              </div>
+              <div className={styles.inputBox}>
+                <div className={styles.inputContainer}>
+                <label>سنة التصنيع:</label>
+                <select className={styles.inputField} value={selectedCar.year} onChange={e => setSelectedCar({...selectedCar, year:e.target.value, transmission:'', category:'', color:''})}>
+                  <option value="">اختر السنة</option>
+                  {getYears().map(year => <option key={year} value={year}>{year}</option>)}
+                </select>
+              </div>
+              <div className={styles.inputContainer}>
+                <label>نوع الجير:</label>
+                <select className={styles.inputField} value={selectedCar.transmission} onChange={e => setSelectedCar({...selectedCar, transmission:e.target.value, category:'', color:''})}>
+                  <option value="">اختر نوع الجير</option>
+                  {getTransmissions().map(trans => <option key={trans} value={trans}>{trans}</option>)}
+                </select>
+              </div>
+              </div>
+              <div className={styles.inputBox}>
+                <div className={styles.inputContainer}>
+                <label>الفئة:</label>
+                <select className={styles.inputField} value={selectedCar.category} onChange={e => setSelectedCar({...selectedCar, category:e.target.value, color:''})}>
+                  <option value="">اختر الفئة</option>
+                  {getCategories().map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                </select>
+              </div>
+              <div className={styles.inputContainer}>
+                <label>اللون:</label>
+                <select className={styles.inputField} value={selectedCar.color} onChange={e => setSelectedCar({...selectedCar, color:e.target.value})}>
+                  <option value="">اختر اللون</option>
+                  {getColors().map(color => <option key={color} value={color}>{color}</option>)}
+                </select>
+              </div>
+              </div>
+            </div>
+            )}
+          {/* الخطوة 2: بيانات العميل */}
+          {step === 2 && (
+            <div className={styles.stepContent}>
+              <div className={styles.inputBox}>
+                <div className={styles.inputContainer}>
+                <label htmlFor="">اسم العميل</label>
+              <input className={styles.inputField} type="text" placeholder="اسم العميل" value={clientData.name} onChange={e => setClientData({...clientData, name: e.target.value})}/>
+              </div>
+              <div className={styles.inputContainer}>
+                <label htmlFor="">رقم الهاتف</label>
+                <input className={styles.inputField} type="text" placeholder="رقم الهاتف" value={clientData.phone} onChange={e => setClientData({...clientData, phone: e.target.value})}/>
+              </div>
+              </div>
+              <div className={styles.inputBox}>
+                <div className={styles.inputContainer}>
+                <label className={styles.labelField}>تاريخ الميلاد:</label>
+              <input className={styles.inputField} type="date" value={clientData.birthDate} onChange={e => setClientData({...clientData, birthDate: e.target.value})}/>
+              </div>
+              <div className={styles.inputContainer}>
+                <label htmlFor="">رقم الهوية</label>
+                <input className={styles.inputField} type="text" placeholder="رقم الهوية (اختياري)" value={clientData.nationalId} onChange={e => setClientData({...clientData, nationalId: e.target.value})}/>
+              </div>
+              </div>
+              <div className={styles.inputBox}>
+                <div className={styles.inputContainer}>
+                <label className={styles.labelField}>جهة العمل:</label>
+                <select className={styles.selectField} value={clientData.workType} onChange={e => setClientData({...clientData, workType: e.target.value})}>
+                  <option value="">اختر جهة العمل</option>
+                  <option value="حكومي مدني">حكومي مدني</option>
+                  <option value="حكومي عسكري">حكومي عسكري</option>
+                  <option value="متقاعد">متقاعد</option>
+                  <option value="اخرى">اخرى</option>
+                </select>
+              </div>
+              <div className={styles.inputContainer}>
+                <label htmlFor="">الراتب</label>
+                <input className={styles.inputField} type="number" placeholder="الراتب" value={clientData.salary} onChange={e => setClientData({...clientData, salary: e.target.value})}/>
+              </div>
+              </div>
+              {/* <div className={styles.inputContainer}>
+                <label className={styles.labelField}>الجنس:</label>
+                <select className={styles.selectField} value={clientData.gender} onChange={e => setClientData({...clientData, gender: e.target.value})}>
+                  <option value="">اختر الجنس</option>
+                  <option value="ذكر">ذكر</option>
+                  <option value="أنثى">أنثى</option>
+                </select>
+              </div> */}
+              {/* <div className={styles.inputContainer}>
+                <label htmlFor="">المدينة</label>
+                <input className={styles.inputField} type="text" placeholder="المدينة" value={clientData.city} onChange={e => setClientData({...clientData, city: e.target.value})}/>
+              </div> */}
+              <div className={styles.inputBox}>
+                <div className={styles.inputContainer}>
+                <label htmlFor="">جهة تحويل الراتب</label>
+                <input className={styles.inputField} type="text" placeholder="جهة تحويل الراتب" value={clientData.salaryBank} onChange={e => setClientData({...clientData, salaryBank: e.target.value})}/>
+              </div>
+              <div className={styles.inputContainer}>
+                <label htmlFor="">الالتزامات الشهرية</label>
+                <input className={styles.inputField} type="number" placeholder="اجمالي الالتزامات الشهرية" value={clientData.monthlyObligations} onChange={e => setClientData({...clientData, monthlyObligations: e.target.value})}/>
+              </div>
+              </div>
+              <div className={styles.inputBox}>
+                <div className={styles.inputContainer}>
+                <label className={styles.labelField}>الجنسية:</label>
+                <select className={styles.selectField} value={clientData.nationality} onChange={e => setClientData({...clientData, nationality: e.target.value})}>
+                  <option value="">اختر الجنسية</option>
+                  <option value="سعودي">سعودي</option>
+                  <option value="مقيم">مقيم</option>
+                  <option value="قبائل نازحة">قبائل نازحة</option>
+                </select>
+              </div>
+              <div className={styles.inputContainer}>
+                <label htmlFor="">البريد الالكتروني</label>
+                <input className={styles.inputField} type="email" placeholder="البريد الإلكتروني (اختياري)" value={clientData.email} onChange={e => setClientData({...clientData, email: e.target.value})}/>
+              </div>
+              </div>
+              <div className={styles.radios}>
+                <div className={styles.radioGroup}>
+                  <label>هل يوجد تعثرات مالية؟</label>
+                  <div className={styles.radioSelect}>
+                     <label><input type="radio" name="financialIssues" value="نعم" checked={clientData.financialIssues === 'نعم'} onChange={e => setClientData({...clientData, financialIssues: e.target.value})}/> نعم</label>
+                  <label><input type="radio" name="financialIssues" value="لا" checked={clientData.financialIssues === 'لا'} onChange={e => setClientData({...clientData, financialIssues: e.target.value})}/> لا</label>
+                  </div>
+                </div>
+                <div className={styles.radioGroup}>
+                  <label>هل يوجد مخالفات مرورية؟</label>
+                  <div className={styles.radioSelect}>
+                    <label><input type="radio" name="trafficFines" value="نعم" checked={clientData.trafficFines === 'نعم'} onChange={e => setClientData({...clientData, trafficFines: e.target.value})}/> نعم</label>
+                    <label><input type="radio" name="trafficFines" value="لا" checked={clientData.trafficFines === 'لا'} onChange={e => setClientData({...clientData, trafficFines: e.target.value})}/> لا</label>
+                  </div>
+                </div>
+                <div className={styles.radioGroup}>
+                  <label>هل يوجد رخصة قيادة؟</label>
+                  <div className={styles.radioSelect}>
+                     <label><input type="radio" name="drivingLicense" value="نعم" checked={clientData.drivingLicense === 'نعم'} onChange={e => setClientData({...clientData, drivingLicense: e.target.value})}/> نعم</label>
+                    <label><input type="radio" name="drivingLicense" value="لا" checked={clientData.drivingLicense === 'لا'} onChange={e => setClientData({...clientData, drivingLicense: e.target.value})}/> لا</label>
+                  </div>
+                </div>
+                <div className={styles.radioGroup}>
+                  <label>هل يوجد قرض عقاري؟</label>
+                  <div className={styles.radioSelect}>
+                    <label><input type="radio" name="mortgageLoan" value="نعم" checked={clientData.mortgageLoan === 'نعم'} onChange={e => setClientData({...clientData, mortgageLoan: e.target.value})}/> نعم</label>
+                    <label><input type="radio" name="mortgageLoan" value="لا" checked={clientData.mortgageLoan === 'لا'} onChange={e => setClientData({...clientData, mortgageLoan: e.target.value})}/> لا</label>
+                  </div>
+                </div>
+              </div>
+              {/* <button className={`${styles.btn} ${styles.btnGenerateOffers}`} onClick={generateOffers}>احسب العروض</button> */}
+            </div>
+          )}
+          {/* الخطوة 3: العروض */}
+          {step === 3 && (
+            <div className={styles.stepContent}>
+              <h3>العروض المتاحة</h3>
+              {offers.map(offer => (
+                <div
+                  key={offer.id}
+                  className={`${styles.offerCard} ${selectedOffer?.id === offer.id ? styles.selected : ''}`}
+                  onClick={() => setSelectedOffer(offer)}
+                >
+                  <p>البنك: {offer.bank}</p>
+                  <p>أقل مقدم: {offer.minDownPayment}%</p>
+                  <p>المدة: {offer.minDuration} - {offer.maxDuration} سنوات</p>
+                  <p>نسبة التمويل: {offer.interestRate}%</p>
+                  <p>{offer.notes}</p>
+                </div>
+              ))}
+            </div>
+          )}
+          {/* الخطوة 4: تنفيذ الطلب */}
+          {step === 4 && selectedOffer && (
+            <div className={styles.stepContent}>
+              <h3>تنفيذ الطلب</h3>
+              <p>العميل: {clientData.name}</p>
+              <p>السيارة: {selectedCar.brand} - {selectedCar.model}</p>
+              <p>البنك / جهة التمويل: {selectedOffer.bank}</p>
+              <select value={seller} onChange={e => setSeller(e.target.value)}>
+                <option value="">اختر اسم البائع</option>
+                <option value="Ahmed">Ahmed</option>
+                <option value="Mohamed">Mohamed</option>
+                <option value="Ali">Ali</option>
+              </select>
+              <button className={styles.finalizeBtn} onClick={finalizeRequest}>تنفيذ الطلب</button>
+            </div>
+          )}
+        </div>
+        </div>
         {/* أزرار التنقل بين الخطوات */}
         <div className={styles.navigationBtns}>
-          {step > 1 && <button onClick={handlePrevStep}>رجوع</button>}
-          {step < 4 && <button onClick={handleNextStep}>التالي</button>}
+          {step > 1 && <button onClick={handlePrevStep} className={styles.back}>رجوع</button>}
+          {step < 4 && <button onClick={handleNextStep} className={styles.next}>التالي</button>}
         </div>
       </div>
     </div>
